@@ -1,9 +1,11 @@
 import Group from "./group-user";
 import { useContext } from "react";
 import { AppContext } from "../context-api/AppProvider";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = () => {
-  const {roomSelected} = useContext(AppContext)
+  const { roomSelected } = useContext(AppContext);
 
   return (
     <div className="py-2 px-4 text-[#444] border-solid border-b-2 border-[#ccc]">
@@ -18,14 +20,11 @@ const Header = () => {
             </>
           ) : (
             <>
-              <h1 className="text-base font-semibold">Room</h1>
-              <p className="text-sm">description</p>
+              <h1 className="flex items-center text-base"> <span className="text-yellow-400 mr-1"><FontAwesomeIcon icon={faTriangleExclamation} /></span> Hãy tạo phòng mới! </h1>
             </>
           )}
         </div>
-        <div>
-          <Group />
-        </div>
+        <div>{roomSelected && <Group />}</div>
       </div>
     </div>
   );

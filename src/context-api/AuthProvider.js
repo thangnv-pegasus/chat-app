@@ -20,20 +20,23 @@ const AuthProvider = ({ children }) => {
         setLoading(false);
         nav("/chat-room");
         return;
+      } else {
+        setUser({});
+        setLoading(false);
+        nav("/");
       }
-        nav("/login");
     });
 
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [nav]);
 
-  // console.log(loading);
+  console.log(loading);
 
   return (
     <Context.Provider value={user}>
-      {loading ? <Loading /> : <>{children}</>}
+      {loading === true ? <Loading /> : <>{children}</>}
       {/* {children} */}
     </Context.Provider>
   );

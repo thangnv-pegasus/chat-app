@@ -2,7 +2,7 @@
 const Loading = () => {
   return (
     <>
-      loading
+      loading...
       {/* loading */}
     </>
   );

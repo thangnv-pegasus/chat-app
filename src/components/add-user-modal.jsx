@@ -21,18 +21,16 @@ const AddUserModal = ({ setOpenModal, user }) => {
 
   const addUserToRoom = async () => {
     let check = null;
-    let result = ''
+    let result = "";
 
-    const checkEmail = async () => {
-      const q = query(collection(db, "users"), where("email", "==", email));
+    const q = query(collection(db, "users"), where("email", "==", email));
 
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        check = true;
-        result = doc.data()
-      });
-    };
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      check = true;
+      result = doc.data();
+    });
 
     const userRef = doc(db, "rooms", roomSelected?.id);
 
@@ -41,11 +39,9 @@ const AddUserModal = ({ setOpenModal, user }) => {
       await updateDoc(userRef, {
         members: [...roomSelected.members, result?.uid],
       });
-      alert('Thêm thành công!')
+      alert("Thêm thành công!");
     }
   };
-
-  
 
   return (
     <div

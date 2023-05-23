@@ -13,7 +13,7 @@ const AddRoomModal = ({ setOpenModal }) => {
   const rand = Math.floor(Math.random() * 10000) + 1;
 
   const addRoom = async () => {
-    await setDoc(doc(db, "rooms", name), {
+    await setDoc(doc(db, "rooms", `${name + rand}`), {
       fieldName: name,
       description: desc,
       members: [user.uid],

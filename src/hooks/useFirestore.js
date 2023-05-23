@@ -1,4 +1,10 @@
-import { onSnapshot, where, collection, query, orderBy } from "firebase/firestore";
+import {
+  onSnapshot,
+  where,
+  collection,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase/config";
 
@@ -19,11 +25,14 @@ const useFirestore = (collection1, condition) => {
     // console.log(collectionRef);
 
     const unsubscribe = onSnapshot(query1, (querySnapshot) => {
-      const cities = [];
+      const arr = [];
       querySnapshot.forEach((doc) => {
-        cities.push(doc.data());
+        arr.push(doc.data());
       });
-      setDocument(cities);
+      arr.sort((a, b) => {
+        return a?.timestamp - b?.timestamp;
+      });
+      setDocument(arr);
     });
 
     // console.log(collectionRef);

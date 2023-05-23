@@ -20,7 +20,7 @@ const AppProvider = ({ children }) => {
   const roomDefault = async () => {
     const q = query(
       collection(db, "rooms"),
-      where("members", "array-contains", user.uid),
+      where("members", "array-contains", user?.uid || ""),
       limit(1)
     );
     const querySnapshot = await getDocs(q);

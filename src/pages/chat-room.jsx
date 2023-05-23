@@ -20,11 +20,12 @@ const ChatRoom = () => {
     auth
       .signOut()
       .then(() => {
-        nav("/login");
+        nav("/");
       })
       .catch((error) => {
         console.log(error);
       });
+    // window.location.reload();
   };
 
   const handleSubmit = async () => {
@@ -39,7 +40,7 @@ const ChatRoom = () => {
   };
 
   const formatDate = (seconds) => {
-    console.log(seconds)
+    // console.log(seconds);
     let format = "";
     if (seconds) {
       format = formatRelative(new Date(seconds * 1000), new Date());
@@ -57,9 +58,7 @@ const ChatRoom = () => {
     };
   }, [roomSelected]);
 
-  let messages = useFirestore("messages", condition).sort((a, b) => {
-    return a.seconds - b.seconds;
-  });;
+  const messages = useFirestore("messages", condition);
 
   return (
     <div className="grid grid-cols-1fr_3fr h-screen text-white">
