@@ -1,12 +1,9 @@
-import { doc, onSnapshot, where, collection, query } from "firebase/firestore";
+import { onSnapshot, where, collection, query, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase/config";
 
 const useFirestore = (collection1, condition) => {
   const [document, setDocument] = useState([]);
-  console.log(collection, condition);
-
-  //   console.log(collection, condition);
 
   useEffect(() => {
     let query1 = query(collection(db, collection1));

@@ -9,7 +9,7 @@ const Message = ({ displayName, photoURL, createAt, text }) => {
             <h2 className="text-sm font-medium">
               {displayName}{" "}
             </h2>
-              <span className="text-xs font-normal opacity-80 mt-[-1px] block">{createAt}</span>
+            <span className="text-xs font-normal opacity-80 mt-[-1px] block">{createAt}</span>
             <p className="">{text}</p>
           </div>
         </div>

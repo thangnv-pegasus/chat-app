@@ -1,8 +1,5 @@
-import { collection, onSnapshot, query } from "firebase/firestore";
 import Group from "./group-user";
-import { db } from "../firebase/config";
-import { useContext, useEffect } from "react";
-import { Context } from "../context-api/AuthProvider";
+import { useContext } from "react";
 import { AppContext } from "../context-api/AppProvider";
 
 const Header = () => {
@@ -27,7 +24,7 @@ const Header = () => {
           )}
         </div>
         <div>
-          {/* <Group /> */}
+          <Group />
         </div>
       </div>
     </div>

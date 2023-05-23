@@ -1,6 +1,6 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useContext, useState } from "react";
 import { db } from "../firebase/config";
 import { Context } from "../context-api/AuthProvider";
@@ -18,6 +18,7 @@ const AddRoomModal = ({ setOpenModal }) => {
       description: desc,
       members: [user.uid],
       id: `${name + rand}`,
+      timestamp: serverTimestamp()
     });
   };
 

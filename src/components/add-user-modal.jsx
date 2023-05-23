@@ -1,14 +1,51 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { doc, setDoc } from "firebase/firestore";
-import { useState } from "react";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { db } from "../firebase/config";
+import { AppContext } from "../context-api/AppProvider";
 
 const AddUserModal = ({ setOpenModal, user }) => {
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const { roomSelected } = useContext(AppContext);
 
   const rand = Math.floor(Math.random() * 10000) + 1;
 
+  const addUserToRoom = async () => {
+    let check = null;
+    let result = ''
+
+    const checkEmail = async () => {
+      const q = query(collection(db, "users"), where("email", "==", email));
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        check = true;
+        result = doc.data()
+      });
+    };
+
+    const userRef = doc(db, "rooms", roomSelected?.id);
+
+    // Set the "capital" field of the city 'DC'
+    if (check == true) {
+      await updateDoc(userRef, {
+        members: [...roomSelected.members, result?.uid],
+      });
+      alert('Thêm thành công!')
+    }
+  };
+
+  
 
   return (
     <div
@@ -37,7 +74,7 @@ const AddUserModal = ({ setOpenModal, user }) => {
             name=""
             id="name"
             className="my-1 px-2 py-1 text-sm block w-full border-solid border-[1px] border-gray-300 outline-sky-200"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </form>
         <div className="py-2 px-4 border-t-[1px] border-solid border-gray-400 flex justify-end">
@@ -50,6 +87,7 @@ const AddUserModal = ({ setOpenModal, user }) => {
           <button
             className="block px-4 py-1 ml-2 rounded-sm border-solid border-[1px] border-gray-300 text-white bg-sky-500 hover:bg-sky-400"
             onClick={() => {
+              addUserToRoom();
               setOpenModal(false);
             }}
           >

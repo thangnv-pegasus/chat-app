@@ -1,17 +1,7 @@
 import { faSquarePlus } from "@fortawesome/free-regular-svg-icons";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext, useEffect, useState } from "react";
-import AuthProvider from "../context-api/AuthProvider";
-import {
-  collection,
-  doc,
-  onSnapshot,
-  query,
-  setDoc,
-  where,
-} from "firebase/firestore";
-import { db } from "../firebase/config";
+import { useState } from "react";
 import AddRoomModal from "./add-room-modal";
 
 const RoomList = ({ rooms, user, setRoomSelected }) => {

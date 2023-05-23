@@ -5,7 +5,7 @@ import {
   } from "firebase/auth";
   import { auth, db } from "../firebase/config";
   import { useNavigate } from "react-router-dom";
-  import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+  import { collection, addDoc, setDoc, doc, serverTimestamp } from "firebase/firestore";
   
   const Login = () => {
     const provider = new FacebookAuthProvider();
@@ -13,21 +13,20 @@ import {
   
     const handleLogin = async () => {
       const data = await signInWithPopup(auth, provider);
-      // navigate("/chat-room");
+      navigate("/chat-room");
   
       // Add a new document with a generated id.
       const { displayName, photoURL, uid, email } = data.user;
       const check = getAdditionalUserInfo(data);
       const providerId = check.providerId;
-      // console.log(check.providerId)
-      // console.log({ data });
       if (check.isNewUser == true) {
         await setDoc(doc(db, "users", uid), {
           displayName,
           photoURL,
           uid,
           email,
-          providerId
+          providerId,
+          timestamp: serverTimestamp()
         });
       }
     };
