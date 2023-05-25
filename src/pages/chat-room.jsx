@@ -63,7 +63,7 @@ const ChatRoom = () => {
   return (
     <div className="grid grid-cols-1fr_3fr h-screen text-white">
       <div className="bg-purple-900">
-        <div className="flex py-2 border-b-[1px] border-solid border-[#ccc] justify-between items-center">
+        <div className="flex py-2 border-b-[1px] border-solid border-[#ccc] justify-between items-center flex-wrap">
           <div className="flex px-3 items-center">
             <div className="rounded-full w-10 h-10 overflow-hidden mr-2">
               <img
@@ -75,7 +75,7 @@ const ChatRoom = () => {
             <p className=" text-sm font-semibold">{user.displayName}</p>
           </div>
           <button
-            className="block mx-3 text-sm border-2 border-solid border-slate-300 px-3 py-2 rounded-md transition-all ease-linear hover:border-gray-100"
+            className="block mx-3 text-sm border-2 border-solid border-slate-300 rounded-md transition-all ease-linear hover:border-gray-100 lg:px-3 lg:py-2 sm:py-1 sm:px-2 sm:mt-2"
             onClick={() => logOut()}
           >
             Đăng xuất
