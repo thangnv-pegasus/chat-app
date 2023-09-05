@@ -1,13 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { db } from "../firebase/config";
 import { Context } from "./AuthProvider";
-import {
-  collection,
-  getDocs,
-  limit,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import useFirestore from "../hooks/useFirestore";
 
 export const AppContext = createContext();
@@ -20,7 +14,7 @@ const AppProvider = ({ children }) => {
   const roomDefault = async () => {
     const q = query(
       collection(db, "rooms"),
-      where("members", "array-contains", user?.uid || ""),
+      where("members", "array-contains", user.uid || ""),
       limit(1)
     );
     const querySnapshot = await getDocs(q);
@@ -35,6 +29,10 @@ const AppProvider = ({ children }) => {
   // set room default is first loading
   useEffect(() => {
     roomDefault();
+
+    return () => {
+      roomDefault();
+    };
   }, []);
 
   const condition = useMemo(() => {

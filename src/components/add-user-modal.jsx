@@ -9,7 +9,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useState } from "react";
 import { db } from "../firebase/config";
 import { AppContext } from "../context-api/AppProvider";
 
@@ -53,7 +53,7 @@ const AddUserModal = ({ setOpenModal, user }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <h1 className="py-3 px-4 border-b-[1px] border-solid border-gray-400 flex justify-between">
-          <p className="text-lg font-medium">Tạo phòng</p>
+          <p className="text-lg font-medium">Thêm người dùng</p>
           <span
             className="text-xl font-normal cursor-pointer"
             onClick={() => setOpenModal(false)}

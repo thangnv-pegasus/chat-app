@@ -3,7 +3,6 @@ import {
   where,
   collection,
   query,
-  orderBy,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../firebase/config";
@@ -40,7 +39,7 @@ const useFirestore = (collection1, condition) => {
     return () => {
       unsubscribe();
     };
-  }, [collection, condition]);
+  }, [collection1, condition]);
 
   return document;
 };
